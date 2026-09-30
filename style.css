@@ -8,8 +8,17 @@ h1{font-size:clamp(2.2rem,6vw,4.2rem)} h2{font-size:clamp(1.7rem,4vw,2.8rem)} h3
 p{margin:0 0 1em;max-width:62ch} .g{color:var(--g)}
 section{padding:72px 20px} .w{max-width:1040px;margin:0 auto}
 .alt{background:var(--bg2);border-block:1px solid var(--line)}
-.btn{display:inline-block;background:var(--g);color:#03110a;font:800 1rem Manrope,sans-serif;text-decoration:none;padding:16px 28px;border-radius:999px;box-shadow:0 0 28px #22f26a55;transition:transform .15s}
-.btn:hover{transform:translateY(-2px)} a:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--g);color:#03110a;font:800 1rem Manrope,sans-serif;text-align:center;text-decoration:none;padding:16px 28px;border-radius:999px;box-shadow:0 0 28px #22f26a55;transition:transform .2s,background .2s;animation:button-glow 3s ease-in-out 3}
+.btn::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 25%,#ffffff66 50%,transparent 75%);transform:translateX(-150%);transition:transform .6s}
+.btn:hover,.btn:focus-visible{transform:translateY(-3px);background:#64ff96}
+.btn:hover::after,.btn:focus-visible::after{transform:translateX(150%)}
+.btn:active{transform:translateY(0) scale(.97)}
+a:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@keyframes button-glow{0%,100%{box-shadow:0 0 18px #22f26a33}50%{box-shadow:0 0 34px #22f26a77}}
+.help-btn{position:fixed;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:10;background:#10271a;color:var(--tx);border:1px solid var(--g);padding:12px 20px;animation:none;box-shadow:0 8px 28px #0008}
+.help-btn:hover,.help-btn:focus-visible{background:#1b432b}
+.help-btn span{display:inline-grid;place-items:center;width:24px;height:24px;border:1px solid var(--g);border-radius:50%;color:var(--g)}
+#duvidas{scroll-margin-top:24px}
 .hero{display:grid;gap:32px;align-items:center;grid-template-columns:1.1fr .9fr;background:radial-gradient(60% 80% at 80% 30%,#0f4d27 0,transparent 70%)}
 .hero img{width:100%;border-radius:20px;border:1px solid var(--line)}
 .tags{color:var(--mut);font-size:.92rem;margin-top:18px}
@@ -25,9 +34,16 @@ section{padding:72px 20px} .w{max-width:1040px;margin:0 auto}
 .nao{list-style:none;padding:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .nao li:before{content:"✕ ";color:var(--g);font-weight:800}
 .para li{margin-bottom:10px}
-details{border-bottom:1px solid var(--line);padding:16px 0} summary{cursor:pointer;font-weight:800}
-details p{color:var(--mut);margin:10px 0 0}
+details{border:1px solid var(--line);border-radius:14px;margin-top:12px;background:#08100b;overflow:hidden;transition:border-color .2s}
+details[open]{border-color:var(--g)}
+summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-weight:800;padding:20px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex-shrink:0;color:var(--g);font-size:1.5rem;line-height:1}
+details[open] summary::after{content:"−"}
+summary:hover{background:#10271a}
+summary:focus-visible{outline-offset:-4px}
+details p{color:var(--mut);margin:0;padding:0 20px 20px}
 .fim{text-align:center}.fim img{width:min(100%,520px);border-radius:16px;margin-bottom:28px}.fim p,.fim h2{margin-inline:auto}
-footer{padding:32px 20px;color:var(--mut);font-size:.85rem;text-align:center;border-top:1px solid var(--line)}
+footer{padding:32px 20px calc(100px + env(safe-area-inset-bottom,0px));color:var(--mut);font-size:.85rem;text-align:center;border-top:1px solid var(--line)}
 @media(max-width:800px){.hero{grid-template-columns:1fr}section{padding:56px 18px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.btn:hover,.btn:focus-visible,.btn:active{transform:none}}

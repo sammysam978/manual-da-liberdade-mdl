@@ -7,9 +7,3 @@ document.querySelectorAll('details').forEach(function (item) {
     });
   });
 });
-
-// Troque pelo link de checkout ou da página de vendas
-var LINK_CHECKOUT = '#';
-document.querySelectorAll('a.btn').forEach(function (btn) {
-  if (LINK_CHECKOUT !== '#') btn.href = LINK_CHECKOUT;
-});
